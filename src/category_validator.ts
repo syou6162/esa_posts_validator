@@ -10,8 +10,6 @@ async function getPostsWithNoCategory(
     const response = await axios.get<EsaSearchResult>(`/v1/teams/${esaConfig.teamName}/posts`, {
         params: {
             q: "on:/",
-            sort: "number",
-            order: "asc"
         },
     });
     return response.data;
@@ -30,7 +28,7 @@ getPostsWithNoCategory(axios, esaConfig).then((result: EsaSearchResult) => {
     const webhook = new IncomingWebhook(url);
     if (posts.length > 0) {
         let text = "以下のpostのカテゴリを考えませんか?\n"
-        posts.slice(0, 3).forEach((post: EsaPost) => {
+        posts.forEach((post: EsaPost) => {
             text += `- ${post.full_name}\n`;
             text += `  - https://${esaConfig.teamName}.esa.io/posts/${post.number}\n`
         });

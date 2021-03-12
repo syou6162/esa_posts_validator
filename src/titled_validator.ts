@@ -10,8 +10,6 @@ async function getPostsWithNoTitle(
     const response = await axios.get<EsaSearchResult>(`/v1/teams/${esaConfig.teamName}/posts`, {
         params: {
             q: "title:Untitled",
-            sort: "number",
-            order: "asc"
         },
     });
     return response.data;
@@ -27,7 +25,7 @@ getPostsWithNoTitle(axios, esaConfig).then((result: EsaSearchResult) => {
     const posts = result.posts;
     if (posts.length > 0) {
         let text = "以下のpostにタイトルを付けませんか?\n"
-        posts.slice(0, 3).forEach((post: EsaPost) => {
+        posts.forEach((post: EsaPost) => {
             text += `- ${post.full_name}\n`;
             text += `  - https://${esaConfig.teamName}.esa.io/posts/${post.number}\n`
         });
