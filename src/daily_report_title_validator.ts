@@ -1,7 +1,11 @@
 import { AxiosInstance } from 'axios';
 import { IncomingWebhook } from '@slack/webhook';
+import format from 'date-fns/format';
+import { convertToTimeZone } from 'date-fns-timezone';
 
 import { EsaConfig, EsaPost, EsaSearchResult, getEsaConfig, createAxiosClient } from './esa'
+
+const timeZone = "Asia/Tokyo";
 
 async function getDailyReport(
     axios: AxiosInstance,
@@ -10,9 +14,7 @@ async function getDailyReport(
 ): Promise<EsaSearchResult> {
     const response = await axios.get<EsaSearchResult>(`/v1/teams/${esaConfig.teamName}/posts`, {
         params: {
-            q: `in:${category}`,
-            sort: "number",
-            order: "asc"
+            q: `in:${category} created:<${format(convertToTimeZone(new Date, { timeZone: timeZone }), 'yyyy-MM-dd')}`,
         },
     });
     return response.data;
