@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios';
-
-const axiosBase = require('axios');
+import axios from 'axios';
 
 export type EsaConfig = {
     teamName: string;
@@ -31,7 +30,7 @@ export function getEsaConfig(): EsaConfig {
 }
 
 export function createAxiosClient(accessToken: string): AxiosInstance {
-    const axios = axiosBase.create({
+    return axios.create({
         baseURL: 'https://api.esa.io',
         headers: {
             'Content-Type': 'application/json',
@@ -39,5 +38,4 @@ export function createAxiosClient(accessToken: string): AxiosInstance {
         },
         responseType: 'json',
     });
-    return axios;
 }
