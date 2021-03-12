@@ -1,6 +1,9 @@
 name: 日報のタイトルのvalidation
 
-on: [push]
+on:
+  schedule:
+    # UTCの02:00はJSTだと11:00
+    - cron: '0 2 * * *'
 
 jobs:
   title_validation:

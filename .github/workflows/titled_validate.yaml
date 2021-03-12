@@ -1,6 +1,9 @@
 name: タイトルなしのpostをvalidate
 
-on: [push]
+on:
+schedule:
+  # UTCの04:00はJSTだと13:00
+  - cron: '0 4 * * *'
 
 jobs:
   title_validation:
