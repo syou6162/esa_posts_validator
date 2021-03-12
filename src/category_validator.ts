@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios';
-
-const { IncomingWebhook } = require('@slack/webhook');
+import { IncomingWebhook } from '@slack/webhook';
 
 import { EsaConfig, EsaPost, EsaSearchResult, getEsaConfig, createAxiosClient } from './esa'
 
@@ -39,6 +38,12 @@ getPostsWithNoCategory(axios, esaConfig).then((result: EsaSearchResult) => {
             await webhook.send({
                 text: text
             });
-        })();
+        })().catch(err => {
+            console.log(err);
+            process.exit(1);
+        });
     }
-});
+}).catch(err => {
+    console.log(err);
+    process.exit(1);
+})
