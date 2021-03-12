@@ -23,7 +23,7 @@ const esaConfig = getEsaConfig();
 const axios = createAxiosClient(esaConfig.accessToken);
 
 async function getDailyReportWithInvalidTitle(axios: AxiosInstance, esaConfig: EsaConfig): Promise<EsaPost[]> {
-    let invalidPosts: EsaPost[] = [];
+    const invalidPosts: EsaPost[] = [];
     await getDailyReport(axios, esaConfig, "日報").then((result: EsaSearchResult) => {
         result.posts.forEach((post: EsaPost) => {
             if (post.name == "日報") {
