@@ -1,0 +1,15 @@
+name: 日報のタイトルのvalidation
+
+on: [push]
+
+jobs:
+  title_validation:
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+    - run: npm install
+    - run: npx ts-node src/daily_report_title_validator.ts
