@@ -41,7 +41,7 @@ getDailyReportWithInvalidTitle(axios, esaConfig).then((posts: EsaPost[]) => {
     const webhook = new IncomingWebhook(url);
     if (posts.length > 0) {
         let text = "以下のpostのタイトル名「日報」から変更しませんか?\n"
-        posts.slice(0, 3).forEach((post: EsaPost) => {
+        posts.forEach((post: EsaPost) => {
             text += `- ${post.full_name}\n`;
             text += `  - https://${esaConfig.teamName}.esa.io/posts/${post.number}\n`
         });
