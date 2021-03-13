@@ -11,10 +11,11 @@ async function getDailyReport(
     axios: AxiosInstance,
     esaConfig: EsaConfig,
     category: string,
+    title: string,
 ): Promise<EsaSearchResult> {
     const response = await axios.get<EsaSearchResult>(`/v1/teams/${esaConfig.teamName}/posts`, {
         params: {
-            q: `in:${category} created:<${format(convertToTimeZone(new Date, { timeZone: timeZone }), 'yyyy-MM-dd')}`,
+            q: `in:${category} title:${title} created:<${format(convertToTimeZone(new Date, { timeZone: timeZone }), 'yyyy-MM-dd')}`,
         },
     });
     return response.data;
@@ -23,25 +24,13 @@ async function getDailyReport(
 const esaConfig = getEsaConfig();
 const axios = createAxiosClient(esaConfig.accessToken);
 
-async function getDailyReportWithInvalidTitle(axios: AxiosInstance, esaConfig: EsaConfig): Promise<EsaPost[]> {
-    const invalidPosts: EsaPost[] = [];
-    await getDailyReport(axios, esaConfig, "日報").then((result: EsaSearchResult) => {
-        result.posts.forEach((post: EsaPost) => {
-            if (post.name == "日報") {
-                invalidPosts.push(post);
-            }
-        });
-    });
-    return invalidPosts;
-}
-
-getDailyReportWithInvalidTitle(axios, esaConfig).then((posts: EsaPost[]) => {
+getDailyReport(axios, esaConfig, "日報", "日報").then((result: EsaSearchResult) => {
     const env = process.env
     const url = env.SLACK_WEBHOOK || ""
     const webhook = new IncomingWebhook(url);
-    if (posts.length > 0) {
+    if (result.posts.length > 0) {
         let text = "以下のpostのタイトル名「日報」から変更しませんか?\n"
-        posts.forEach((post: EsaPost) => {
+        result.posts.forEach((post: EsaPost) => {
             text += `- ${post.full_name}\n`;
             text += `  - https://${esaConfig.teamName}.esa.io/posts/${post.number}\n`
         });
