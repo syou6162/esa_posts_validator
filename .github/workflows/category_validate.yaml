@@ -1,6 +1,7 @@
 name: カテゴリなしのpostをvalidate
 
 on:
+  workflow_dispatch:
   schedule:
     # UTCの03:00はJSTだと12:00
     - cron: '0 3 * * *'

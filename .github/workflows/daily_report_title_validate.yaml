@@ -1,6 +1,7 @@
 name: 日報のタイトルのvalidation
 
 on:
+  workflow_dispatch:
   schedule:
     # UTCの02:00はJSTだと11:00
     - cron: '0 2 * * *'

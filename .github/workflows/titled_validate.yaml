@@ -1,6 +1,7 @@
 name: タイトルなしのpostをvalidate
 
 on:
+  workflow_dispatch:
   schedule:
     # UTCの04:00はJSTだと13:00
     - cron: '0 4 * * *'
