@@ -9,7 +9,7 @@ async function getPostsWithNoTitle(
 ): Promise<EsaSearchResult> {
     const response = await axios.get<EsaSearchResult>(`/v1/teams/${esaConfig.teamName}/posts`, {
         params: {
-            q: "title:Untitled",
+            q: "title:Untitled -in:Archived",
         },
     });
     return response.data;
