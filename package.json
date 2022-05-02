@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@slack/webhook": "^6.0.0",
-    "axios": "^0.26.0",
+    "axios": "^0.27.0",
     "date-fns": "^2.21.1",
     "date-fns-timezone": "^0.1.4"
   }
