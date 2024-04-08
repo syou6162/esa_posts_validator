@@ -18,7 +18,7 @@ jobs:
     - run: npm install
     - name: タイトルのvalidation
       env:
-        ESA_TEAM_NAME: ${{ secrets.ESA_TEAM_NAME }}      
-        ESA_ACCESS_TOKEN: ${{ secrets.ESA_ACCESS_TOKEN }}      
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}      
+        ESA_TEAM_NAME: ${{ secrets.ESA_TEAM_NAME }}
+        ESA_ACCESS_TOKEN: ${{ secrets.ESA_ACCESS_TOKEN }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       run: npx ts-node src/daily_report_title_validator.ts

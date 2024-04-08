@@ -14,7 +14,7 @@ jobs:
     - run: npm install
     - name: lint
       env:
-        ESA_TEAM_NAME: ${{ secrets.ESA_TEAM_NAME }}      
-        ESA_ACCESS_TOKEN: ${{ secrets.ESA_ACCESS_TOKEN }}      
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}      
+        ESA_TEAM_NAME: ${{ secrets.ESA_TEAM_NAME }}
+        ESA_ACCESS_TOKEN: ${{ secrets.ESA_ACCESS_TOKEN }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       run: npx eslint --ext .ts src
